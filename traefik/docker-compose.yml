@@ -1,0 +1,24 @@
+version: '2.1'
+
+services:
+
+  traefik:
+    restart: on-failure
+    image: "traefik:v2.1"
+    container_name: "traefik"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - graphql_poc_network
+  
+networks:
+  graphql_poc_network:
+    driver: bridge

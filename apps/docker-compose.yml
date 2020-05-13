@@ -1,0 +1,43 @@
+version: '2.1'
+
+services:
+
+  flights:
+    restart: on-failure
+    build:
+        context: ./flights
+    labels:
+      - "traefik.http.routers.flights.rule=PathPrefix(`/flights`)"
+      - "traefik.http.routers.flights.middlewares=flights-stripprefix"
+      - "traefik.http.middlewares.flights-stripprefix.stripprefix.prefixes=/flights"
+      - "traefik.enable=true"
+    networks:
+      - traefik_graphql_poc_network
+
+  users:
+    restart: on-failure
+    build:
+        context: ./users
+    labels:
+      - "traefik.http.routers.users.rule=PathPrefix(`/users`)"
+      - "traefik.http.routers.users.middlewares=users-stripprefix"
+      - "traefik.http.middlewares.users-stripprefix.stripprefix.prefixes=/users"
+      - "traefik.enable=true"
+    networks:
+      - traefik_graphql_poc_network
+
+  movies:
+    restart: on-failure
+    build:
+        context: ./movies
+    labels:
+      - "traefik.http.routers.movies.rule=PathPrefix(`/movies`)"
+      - "traefik.http.routers.movies.middlewares=movies-stripprefix"
+      - "traefik.http.middlewares.movies-stripprefix.stripprefix.prefixes=/movies"
+      - "traefik.enable=true"
+    networks:
+      - traefik_graphql_poc_network
+
+networks:
+  traefik_graphql_poc_network:
+    external: true
