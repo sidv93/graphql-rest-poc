@@ -17,3 +17,6 @@ A graphql endpoint aggregating multiple REST microservices
 	npm run start
 ```
 * You can view the GraphQL playground at **http://localhost:4000/**
+
+## To do
+The GraphQL server should be in a docker container. This service was developer using `apollo-server` package. This package does not give us the ability to deploy in a specific url. **[See comment](https://github.com/apollographql/apollo-server/issues/1617#issuecomment-419753087)**. We would have to use `apollo-server-express` package for this. 
