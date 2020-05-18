@@ -26,7 +26,7 @@ const typeDefs = gql`
     input MovieInput {
       title: String
       director: String
-      year: String
+      year: Int
     }
 
     input UserInput {
@@ -45,7 +45,7 @@ const typeDefs = gql`
     type Query {
       movies(title: String, year: Int, offset: Int, limit: Int): [Movie]
       users(firstname: String, lastname: String, age: Int, offset: Int, limit: Int): [User]
-      flights(source: String, destination: String, pilot: String): [Flight]
+      flights(source: String, destination: String, pilot: String, offset: Int, limit: Int): [Flight]
     }
 
     type Mutation {

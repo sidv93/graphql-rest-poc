@@ -22,17 +22,17 @@ export const getFlights = (req, res) => {
         .filter(item => {
             let flag = true;
             if (source) {
-                flag = item.source.includes(source);
+                flag = flag && item.source.includes(source);
             }
             if (destination) {
-                flag = item.destination.includes(destination);
+                flag = flag && item.destination.includes(destination);
             }
             if (pilot) {
-                flag = item.pilot.includes(pilot);
+                flag = flag && item.pilot.includes(pilot);
             }
             return flag;
         })
-        .slice(offset, offset + limit);
+        .slice(offset, (+offset) + (+limit));
     res.status(200);
     return res.json({
         status: 'success',

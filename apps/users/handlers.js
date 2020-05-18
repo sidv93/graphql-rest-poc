@@ -22,17 +22,17 @@ export const getUsers = (req, res) => {
         .filter(item => {
             let flag = true;
             if (firstname) {
-                flag = item.firstname.includes(firstname);
+                flag = flag && item.firstname.includes(firstname);
             }
             if (lastname) {
-                flag = item.lastname.includes(lastname);
+                flag = flag && item.lastname.includes(lastname);
             }
             if (age) {
-                flag = item.age == age;
+                flag = flag && (item.age == age);
             }
             return flag;
         })
-        .slice(offset, offset + limit);
+        .slice(offset, (+offset) + (+limit));
     res.status(200);
     return res.json({
         status: 'success',

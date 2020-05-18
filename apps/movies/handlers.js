@@ -20,14 +20,14 @@ export const getMovies = (req, res) => {
         .filter(item => {
             let flag = true;
             if (title) {
-                flag = item.title.includes(title);
+                flag = flag && item.title.includes(title);
             }
             if (year) {
-                flag = item.year == year;
+                flag = flag && (item.year == year);
             }
             return flag;
         })
-        .slice(offset, offset + limit);
+        .slice(offset, (+offset) + (+limit));
     res.status(200);
     return res.json({
         status: 'success',
