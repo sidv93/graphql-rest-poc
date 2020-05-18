@@ -14,6 +14,6 @@ app.use(cors());
 
 app.use(routes);
 
-const server = app.listen(app.get('port'), () => console.log(`App is running in ${app.get('port')}`));
+const server = app.listen(app.get('port'), () => console.log(`Flights service is running in ${app.get('port')}`));
 
 export default server;
