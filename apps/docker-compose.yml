@@ -38,17 +38,17 @@ services:
     networks:
       - traefik_graphql_poc_network
     
-  graphql:
-    restart: on-failure
-    build:
-        context: ./graphql
-    labels:
-      - "traefik.http.routers.graphql.rule=PathPrefix(`/graphql`)"
-      - "traefik.http.routers.graphql.middlewares=graphql-stripprefix"
-      - "traefik.http.middlewares.graphql-stripprefix.stripprefix.prefixes=/graphql"
-      - "traefik.enable=true"
-    networks:
-      - traefik_graphql_poc_network
+  # graphql:
+  #   restart: on-failure
+  #   build:
+  #       context: ./graphql
+  #   labels:
+  #     - "traefik.http.routers.graphql.rule=PathPrefix(`/graphql`)"
+  #     - "traefik.http.routers.graphql.middlewares=graphql-stripprefix"
+  #     - "traefik.http.middlewares.graphql-stripprefix.stripprefix.prefixes=/graphql"
+  #     - "traefik.enable=true"
+  #   networks:
+  #     - traefik_graphql_poc_network
 
 networks:
   traefik_graphql_poc_network:
