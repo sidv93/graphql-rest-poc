@@ -1,12 +1,10 @@
 import db from './db';
 
 export const addUser = (req, res) => {
-    console.log('body', req.body);
     const newUser = {
         id: db.get('users').size().value()+1,
         ...req.body
     };
-    console.log('new User', newUser);
     db.get('users').push(newUser).write();
     res.status(200);
     return res.json({
@@ -17,7 +15,7 @@ export const addUser = (req, res) => {
 };
 
 export const getUsers = (req, res) => {
-    const { offset = 0, limit = 10, firstname, age, lastname } = req.query;
+    const { offset = 0, limit = 10, firstname, age, lastname, email } = req.query;
     const users = db.get('users').value()
         .filter(item => {
             let flag = true;
@@ -29,6 +27,9 @@ export const getUsers = (req, res) => {
             }
             if (age) {
                 flag = flag && (item.age == age);
+            }
+            if(email) {
+                flag = flag && item.email.includes(email);
             }
             return flag;
         })
@@ -42,11 +43,9 @@ export const getUsers = (req, res) => {
 }
 
 export const updateUser = (req, res) => {
-    console.log('body', req.body);
     const {id} = req.body;
     db.get('users').find({id}).update({...req.body}).write();
     const updatedUser = db.get('users').find({id}).value();
-    console.log('updated User', updatedUser);
     res.status(200);
     return res.json({
         status: 'success',
@@ -56,7 +55,6 @@ export const updateUser = (req, res) => {
 }
 
 export const deleteUser = (req, res) => {
-    console.log('params', req.params);
     const { id } = req.params;
     const user = db.get('users').find({id: +id}).value();
     db.get('users').remove({id: +id}).write();

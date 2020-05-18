@@ -15,12 +15,15 @@ export const addMovie = (req, res) => {
 };
 
 export const getMovies = (req, res) => {
-    const { offset = 0, limit = 10, title, year } = req.query;
+    const { offset = 0, limit = 10, title, year, director } = req.query;
     const movies = db.get('movies').value()
         .filter(item => {
             let flag = true;
             if (title) {
                 flag = flag && item.title.includes(title);
+            }
+            if(director) {
+                flag = flag && item.director.includes(director);
             }
             if (year) {
                 flag = flag && (item.year == year);

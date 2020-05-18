@@ -43,8 +43,8 @@ const typeDefs = gql`
     }
 
     type Query {
-      movies(title: String, year: Int, offset: Int, limit: Int): [Movie]
-      users(firstname: String, lastname: String, age: Int, offset: Int, limit: Int): [User]
+      movies(title: String, director: String, year: Int, offset: Int, limit: Int): [Movie]
+      users(firstname: String, lastname: String, age: Int, email: String, offset: Int, limit: Int): [User]
       flights(source: String, destination: String, pilot: String, offset: Int, limit: Int): [Flight]
     }
 
