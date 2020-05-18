@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import cors from 'cors';
+import routes from './routes';
 
 const app = express();
 
@@ -11,9 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send('Hello from flights');
-});
+app.use(routes);
 
 const server = app.listen(app.get('port'), () => console.log(`App is running in ${app.get('port')}`));
 
