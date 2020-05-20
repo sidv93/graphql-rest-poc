@@ -15,15 +15,21 @@ export const addFlight = (req, res) => {
 };
 
 export const getFlights = (req, res) => {
-    const { offset = 0, limit = 10, source, destination, pilot } = req.query;
+    const { offset = 0, limit = 10, source, destination, pilot, id, passenger } = req.query;
     const flights = db.get('flights').value()
         .filter(item => {
             let flag = true;
+            if (id) {
+                flag = flag && item.id == id;
+            }
             if (source) {
                 flag = flag && item.source.includes(source);
             }
             if (destination) {
                 flag = flag && item.destination.includes(destination);
+            }
+            if (passenger) {
+                flag = flag && item.passengers.includes(passenger);
             }
             if (pilot) {
                 flag = flag && item.pilot.includes(pilot);
@@ -36,6 +42,17 @@ export const getFlights = (req, res) => {
         status: 'success',
         message: 'Flights',
         data: flights
+    });
+}
+
+export const getFlight = (req, res) => {
+    const {id} = req.params;
+    const flight = db.get('flights').find({id: +id}).value();
+    res.status(200);
+    return res.json({
+        status: 'success',
+        message: 'Flight',
+        data: flight
     });
 }
 

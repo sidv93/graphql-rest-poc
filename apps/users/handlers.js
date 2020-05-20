@@ -15,7 +15,7 @@ export const addUser = (req, res) => {
 };
 
 export const getUsers = (req, res) => {
-    const { offset = 0, limit = 10, firstname, age, lastname, email } = req.query;
+    const { offset = 0, limit = 10, firstname, age, lastname, email, id, flight } = req.query;
     const users = db.get('users').value()
         .filter(item => {
             let flag = true;
@@ -25,8 +25,14 @@ export const getUsers = (req, res) => {
             if (lastname) {
                 flag = flag && item.lastname.includes(lastname);
             }
+            if (flight) {
+                flag = flag && (item.flight == flight);
+            }
             if (age) {
                 flag = flag && (item.age == age);
+            }
+            if (id) {
+                flag = flag && (item.id == id);
             }
             if(email) {
                 flag = flag && item.email.includes(email);

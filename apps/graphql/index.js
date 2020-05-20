@@ -9,7 +9,15 @@ import Mutation from './resolvers/mutations';
 const server = new ApolloServer({
   typeDefs,
   resolvers: {
-    Query, Mutation
+    Query,
+    Mutation,
+    User: {
+      flight: async (parent, args, {dataSources}) => {
+        const res = await dataSources.flightsApi.getFlight(parent.flight);
+        console.log('res', res);
+        return res.data;
+      }
+    }
   },
   dataSources: () => {
     return {

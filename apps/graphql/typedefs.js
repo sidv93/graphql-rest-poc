@@ -14,6 +14,7 @@ const typeDefs = gql`
       lastname: String
       age: Int
       email: String
+      flight: Flight
     }
 
     type Flight {

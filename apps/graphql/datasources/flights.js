@@ -6,6 +6,10 @@ class FlightsApi extends RESTDataSource {
         this.baseURL = 'http://localhost/';
     }
 
+    async getFlight(id) {
+        return this.get(`flights/${id}`);
+    }
+
     async getFlights(params) {
         return this.get('flights', {...params});
     }
