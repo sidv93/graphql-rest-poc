@@ -17,6 +17,13 @@ const server = new ApolloServer({
         console.log('res', res);
         return res.data;
       }
+    },
+    Flight: {
+      passengers: async (parent, args, {dataSources}) => {
+        const res = await dataSources.usersApi.getUsers({flight: parent.id});
+        console.log('res', res);
+        return res.data;
+      }
     }
   },
   dataSources: () => {

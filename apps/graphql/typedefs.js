@@ -22,6 +22,7 @@ const typeDefs = gql`
       source: String
       destination: String
       pilot: String
+      passengers: [User]
     }
 
     input MovieInput {
