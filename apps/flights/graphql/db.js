@@ -1,9 +1,9 @@
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
-import sampleMovies from './sampleMovies';
+import sampleFlights from '../sampleFlights';
 
 const adaptor = new FileSync('./db.json');
 const db = low(adaptor);
-db.defaults({movies: sampleMovies}).write();
+db.defaults({flights: sampleFlights}).write();
 
 export default db;
