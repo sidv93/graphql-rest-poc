@@ -13,6 +13,6 @@ const server = new ApolloServer({
   context: { db }
 });
 
-server.listen().then(({ url }) => {
+server.listen(2000).then(({ url }) => {
   console.log(`🚀  Movies GraphQL server is ready at ${url}`);
 });

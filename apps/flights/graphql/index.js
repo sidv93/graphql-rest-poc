@@ -13,6 +13,6 @@ const server = new ApolloServer({
   context: { db }
 });
 
-server.listen().then(({ url }) => {
+server.listen(3000).then(({ url }) => {
   console.log(`🚀  Flights GraphQL server is ready at ${url}`);
 });
