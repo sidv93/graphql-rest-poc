@@ -7,6 +7,7 @@ const typeDefs = gql`
         lastname: String
         age: Int
         email: String
+        flight: String
     }
     input UserInput {
         firstname: String
@@ -24,6 +25,8 @@ const typeDefs = gql`
     }
     type Query {
         users(filters: UserQuery): [User]
+        userById(id: String): User
+        usersByFlight(flightId: String): [User]
     }
     type Mutation {
         addUser(user: UserInput): User

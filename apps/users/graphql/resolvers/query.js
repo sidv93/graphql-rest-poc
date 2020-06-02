@@ -1,6 +1,6 @@
 const Query = {
     users: (_, { filters={} }, { db }) => {
-        const { offset = 0, limit = 10, firstname, age, lastname, email, id, flight } = filters;
+        const { offset = 0, limit = 10, firstname, age, lastname, email, flight } = filters;
         const users = db.get('users').value()
             .filter(item => {
                 let flag = true;
@@ -16,15 +16,22 @@ const Query = {
                 if (age) {
                     flag = flag && (item.age == age);
                 }
-                if (id) {
-                    flag = flag && (item.id == id);
-                }
                 if (email) {
                     flag = flag && item.email.includes(email);
                 }
                 return flag;
             })
             .slice(offset, (+offset) + (+limit));
+        return users;
+    },
+    userById: (_, {id}, {db}) => {
+        console.log('in user by id', id);
+        const user = db.get('users').find({id: +(id)}).value();
+        return [];
+    },
+    usersByFlight: (_, {flightId}, {db}) => {
+        const users = db.get('users').filter({flight: flightId}).value();
+        console.log('flight id', flightId, 'users', users);
         return users;
     }
 };
