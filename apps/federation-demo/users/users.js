@@ -20,7 +20,8 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        user(_, { id }) {
+        user(_, { id }, {userId}) {
+            console.log('userId', userId);
             return {
                 id: "1",
                 firstname: "Siddharth",
@@ -38,9 +39,9 @@ const resolvers = {
                 },
                 {
                     id: "2",
-                firstname: "John",
-                lastname: "Smith",
-                age: 40
+                    firstname: "John",
+                    lastname: "Smith",
+                    age: 40
                 }
             ]
         }
@@ -48,7 +49,12 @@ const resolvers = {
 };
 
 const server = new ApolloServer({
-    schema: buildFederatedSchema([{ typeDefs, resolvers }])
+    schema: buildFederatedSchema([{ typeDefs, resolvers }]),
+    context: ({req}) => {
+        const userId = req.headers['user-id'];
+        console.log('userid', userId);
+        return {userId}
+    }
 });
 
 server.listen({ port }).then(({ url }) => {
