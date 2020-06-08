@@ -10,6 +10,8 @@ const typeDefs = gql`
     id: ID!
     title: String
     year: Int
+    director: String
+    actor: String
   }
 
   extend type Query {
@@ -24,7 +26,9 @@ const resolvers = {
             return {
                 id: "1",
                 title: "Harry Potter and the chamber of secrets",
-                year: 2000
+                year: 2000,
+                director: "John",
+                actor: "John"
             };
         },
         movies() {
@@ -32,12 +36,16 @@ const resolvers = {
                 {
                     id: "1",
                     title: "Harry Potter and the chamber of secrets",
-                    year: 2000
+                    year: 2000,
+                    director: "John",
+                    actor: "John"
                 },
                 {
                     id: "2",
                     title: "Harry Potter and the Deathyly hallows",
-                    year: 2015
+                    year: 2015,
+                    director: "James",
+                    actor: "James"
                 }
             ]
         }
