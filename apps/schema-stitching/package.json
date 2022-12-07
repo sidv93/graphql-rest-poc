@@ -14,7 +14,7 @@
     "apollo-server": "^2.14.1",
     "cross-fetch": "^3.0.4",
     "graphql": "^15.0.0",
-    "graphql-tools": "^6.0.5"
+    "graphql-tools": "^6.2.6"
   },
   "devDependencies": {
     "esm": "^3.2.25",
